@@ -14,6 +14,8 @@ from models.matcher import build_matcher
 from models.position_embedding import build_position_embedding
 from models.transformer import build_transformer
 
+from util.t2p import Linear, Conv1d, Conv2d
+
 
 class RTD(nn.Layer):
 
@@ -30,20 +32,20 @@ class RTD(nn.Layer):
         self.transformer = transformer
         hidden_dim = transformer.d_model
         self.hidden_dim = hidden_dim
-        self.class_embed = nn.Linear(hidden_dim, num_classes + 1)
+        self.class_embed = Linear(hidden_dim, num_classes + 1)
         self.bbox_embed = MLP(hidden_dim, hidden_dim, 2, 3)
         self.query_embed = nn.Embedding(num_queries, hidden_dim)
 
         input_dim = 2048
-        self.input_proj = nn.Conv2D(input_dim, hidden_dim // 2, kernel_size=1)
+        self.input_proj = Conv2d(input_dim, hidden_dim // 2, kernel_size=1)
 
         self.iou_conv = nn.Sequential(
-            nn.Conv1D(self.hidden_dim,
+            Conv1d(self.hidden_dim,
                       self.hidden_dim * 2,
                       kernel_size=3,
                       padding=1),
             x2paddle.torch2paddle.ReLU(inplace=True),
-            nn.Conv1D(self.hidden_dim * 2,
+            Conv1d(self.hidden_dim * 2,
                       self.hidden_dim,
                       kernel_size=3,
                       padding=1))
@@ -346,7 +348,7 @@ class MLP(nn.Layer):
         self.num_layers = num_layers
         h = [hidden_dim] * (num_layers - 1)
         self.layers = nn.LayerList(
-            nn.Linear(n, k) for n, k in zip([input_dim] + h, h + [output_dim]))
+            Linear(n, k) for n, k in zip([input_dim] + h, h + [output_dim]))
 
     def forward(self, x):
         for i, layer in enumerate(self.layers):

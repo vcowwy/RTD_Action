@@ -7,6 +7,8 @@ import paddle.nn.functional as F
 from x2paddle import torch2paddle
 from x2paddle.torch2paddle import create_tensor
 
+from util.t2p import Linear
+
 
 class Transformer(nn.Layer):
 
@@ -67,7 +69,7 @@ class simpleMLP(nn.Layer):
         self.num_layers = num_layers
         h = [hidden_dim] * (num_layers - 1)
         self.layers = nn.LayerList(
-            nn.Linear(n, k) for n, k in zip([input_dim] + h, h + [output_dim]))
+            Linear(n, k) for n, k in zip([input_dim] + h, h + [output_dim]))
 
     def forward(self, x):
         for i, layer in enumerate(self.layers):
@@ -138,9 +140,9 @@ class TransformerDecoderLayer(nn.Layer):
                                                            nhead,
                                                            dropout=dropout)
 
-        self.linear1 = nn.Linear(d_model, dim_feedforward)
+        self.linear1 = Linear(d_model, dim_feedforward)
         self.dropout = nn.Dropout(dropout)
-        self.linear2 = nn.Linear(dim_feedforward, d_model)
+        self.linear2 = Linear(dim_feedforward, d_model)
 
         self.norm1 = nn.LayerNorm(d_model)
         self.norm2 = nn.LayerNorm(d_model)

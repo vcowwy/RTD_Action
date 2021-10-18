@@ -50,7 +50,7 @@ def train_one_epoch(model: paddle.nn.Layer,
         losses = sum(loss_dict[k] * weight_dict[k] for k in loss_dict.keys() if k in weight_dict)
 
         optimizer.clear_grad()
-        losses.backward(retain_graph=True)
+        losses.backward()
 
         if max_norm > 0:
             for i in model.parameters():

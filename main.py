@@ -153,7 +153,6 @@ def main(args):
         learned_params = filter(lambda p: (not p.stop_gradient),
                                 model_without_ddp.parameters())
 
-
     elif args.stage == 2:
         for name, value in model_without_ddp.named_parameters():
             if 'class_embed' not in name:
