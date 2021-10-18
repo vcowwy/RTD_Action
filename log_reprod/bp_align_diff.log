@@ -1,0 +1,11 @@
+2021-10-18 11:25:42,460 - reprod_log.utils - INFO - loss_0:
+2021-10-18 11:25:42,460 - reprod_log.utils - INFO -     mean diff: check passed: True, value: 2.7388575248903e-06
+2021-10-18 11:25:42,460 - reprod_log.utils - INFO - loss_1:
+2021-10-18 11:25:42,460 - reprod_log.utils - INFO -     mean diff: check passed: True, value: 8.356571543703125e-07
+2021-10-18 11:25:42,460 - reprod_log.utils - INFO - loss_2:
+2021-10-18 11:25:42,460 - reprod_log.utils - INFO -     mean diff: check passed: True, value: 0.0
+2021-10-18 11:25:42,461 - reprod_log.utils - INFO - loss_3:
+2021-10-18 11:25:42,461 - reprod_log.utils - INFO -     mean diff: check passed: True, value: 5.1548399792650934e-07
+2021-10-18 11:25:42,461 - reprod_log.utils - INFO - loss_4:
+2021-10-18 11:25:42,461 - reprod_log.utils - INFO -     mean diff: check passed: True, value: 6.7848299593753815e-09
+2021-10-18 11:25:42,461 - reprod_log.utils - INFO - diff check passed
