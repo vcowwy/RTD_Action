@@ -18,7 +18,7 @@ You use some output variables of the previous batch as the inputs of the current
 
 engine.py文件中每个batch的代码如下：
 
-![img_2](https://github.com/vcowwy/RTD_Action/img/img_2.png)
+![img_2](/img/img_2.png)
 
 由上，不存在这个batch使用了上个batch数据的情况。
 
