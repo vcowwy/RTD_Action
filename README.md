@@ -6,7 +6,7 @@
 
 engine.py文件中train_one_epoch的losses.backward()报错如下：
 
-![img_2.png](img_2.png)
+![img_1](https://github.com/vcowwy/RTD_Action/img/img_1.png)
 
 前向和评估指标都与pytorch实现对齐了，但pytorch实现的losses.backward()不会出现这个报错信息。
 
@@ -18,7 +18,7 @@ You use some output variables of the previous batch as the inputs of the current
 
 engine.py文件中每个batch的代码如下：
 
-![img_3.png](img_3.png)
+![img_2](https://github.com/vcowwy/RTD_Action/img/img_2.png)
 
 由上，不存在这个batch使用了上个batch数据的情况。
 
@@ -64,9 +64,9 @@ pytorch实现的网络初始化后，将网络初始化信息保存在outputs/ch
 
 pytorch实现的AR@50为18.70
 
-![img_5.png](img_5.png)
+![img_4](https://github.com/vcowwy/RTD_Action/img/img_4.png)
 
 
 
 paddle实现的AR@50为22.77
-![img_7.png](img_7.png)
+![img_3](https://github.com/vcowwy/RTD_Action/img/img_3.png)
