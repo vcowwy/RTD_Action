@@ -38,15 +38,16 @@ def train_one_epoch(model: paddle.nn.Layer,
 
     max_norm = args.clip_max_norm
 
-    for vid_name_list, locations, samples, targets, num_frames, base, s_e_scores in metric_logger.log_every(data_loader, print_freq, header):
+    for vid_name_list, locations, samples, targets, num_frames, base, s_e_scores \
+        in metric_logger.log_every(data_loader, print_freq, header):
 
         samples = samples.to(device)
         s_e_scores = s_e_scores.to(device)
         targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
-
+        weight_dict = criterion.weight_dict
         outputs = model(locations, samples, s_e_scores)
         loss_dict = criterion(outputs, targets)
-        weight_dict = criterion.weight_dict
+
         losses = sum(loss_dict[k] * weight_dict[k] for k in loss_dict.keys() if k in weight_dict)
 
         optimizer.clear_grad()
@@ -60,6 +61,7 @@ def train_one_epoch(model: paddle.nn.Layer,
         loss_dict_reduced = utils.reduce_dict(loss_dict)
         loss_dict_reduced_unscaled = {
             f'{k}_unscaled': v
+
             for k, v in loss_dict_reduced.items()}
         loss_dict_reduced_scaled = {
             k: (v * weight_dict[k])

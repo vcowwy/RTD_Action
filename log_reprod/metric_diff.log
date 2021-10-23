@@ -1,3 +1,0 @@
-2021-10-18 10:05:29,955 - reprod_log.utils - INFO - top1:
-2021-10-18 10:05:29,955 - reprod_log.utils - INFO -     mean diff: check passed: True, value: 0.0
-2021-10-18 10:05:29,955 - reprod_log.utils - INFO - diff check passed
